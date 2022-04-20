@@ -36,6 +36,90 @@
                 "${workspaceFolder}/PlatformService/PlatformService.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Create terminals",
+            "dependsOn": [
+                "PlatformServiceShell",
+                "CommandServiceShell",
+                "K8SShell",
+                "DockerShell"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "PlatformServiceShell",
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "type": "shell",
+            "command": "",
+            "options": {
+                "cwd": "${workspaceFolder}/PlatformService",
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": []
+                }
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "K8SShell",
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "type": "shell",
+            "command": "",
+            "options": {
+                "cwd": "${workspaceFolder}/K8S",
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": []
+                }
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "CommandServiceShell",
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "type": "shell",
+            "command": "",
+            "options": {
+                "cwd": "${workspaceFolder}/CommandService",
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": []
+                }
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "DockerShell",
+            "runOptions": {
+                "instanceLimit": 1
+            },
+            "type": "shell",
+            "command": "",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "pwsh.exe",
+                    "args": []
+                }
+            },
+            "isBackground": true,
+            "problemMatcher": []
         }
     ]
 }
