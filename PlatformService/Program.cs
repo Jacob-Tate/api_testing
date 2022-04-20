@@ -14,9 +14,20 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSwaggerGen();
 
 // Register the db
-builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseInMemoryDatabase("InMem")
-);
+if(builder.Environment.IsProduction())
+{
+    Console.WriteLine("--> Using Sql Server");
+    builder.Services.AddDbContext<AppDbContext>(options => 
+        options.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConnectionString"))
+    );
+}
+else
+{
+    Console.WriteLine("--> Using InMemDB");
+    builder.Services.AddDbContext<AppDbContext>(options => 
+        options.UseInMemoryDatabase("InMem")
+    );
+}
 
 // Register the interface and implementation
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
@@ -36,6 +47,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-PrepDb.PrepPopulation(app);
+PrepDb.PrepPopulation(app, builder.Environment.IsProduction());
 
 app.Run();
